@@ -2,15 +2,15 @@ const modAxios = require('axios');
 
 const strURL = 'https://jsonplaceholder.typicode.com/users/';
 
-async function getUserEmail(userId) {
+module.exports.getUserEmail = async function getUserEmail(strUserId, strURL) {
     let strEmail;
     try {
         const response = await modAxios({
             method: 'GET',
-            url: userId,
+            url: strUserId,
             baseURL: strURL,
             params: {
-                query: userId
+                query: strUserId
                 }
         });
         strEmail = response.data.email;
@@ -29,7 +29,7 @@ function getHostname(strEmail) {
 }
 
 async function main() {
-    const strEmail = await getUserEmail('4');
+    const strEmail = await getUserEmail('4', strURL);
     let strHostname;
     try {
         strHostname = getHostname(strEmail);
